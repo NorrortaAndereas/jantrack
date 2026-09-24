@@ -8,8 +8,8 @@ Webbapp för att spara olika typer av information och visualisera den.
 
 ```bash
 npm install
-cp .env.example .env.local   # eller: vercel env pull .env.local
-npm run db:push              # skapa tabeller i databasen
+vercel env pull .env.local --environment=production   # hämtar DATABASE_URL
+npm run db:migrate           # skapa tabeller i databasen
 npm run dev
 ```
 
@@ -23,4 +23,6 @@ npm run dev
 
 ## Deploy
 
-Pushar till `main` deployas automatiskt till Vercel. `DATABASE_URL` sätts av Neon-integrationen i Vercel.
+Pushar till `main` deployas automatiskt till Vercel. `DATABASE_URL` sätts av Neon-integrationen, och migreringarna i `drizzle/` körs automatiskt i varje bygge (`scripts/migrate.mjs`).
+
+Ändra schemat så här: redigera `src/db/schema.ts` → `npm run db:generate` → committa den nya filen i `drizzle/` → pusha.
