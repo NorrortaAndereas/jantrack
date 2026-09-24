@@ -3,6 +3,7 @@ import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import * as schema from "./schema";
 
-const url = process.env.DATABASE_URL;
+// neon() ansluter först vid första frågan, så bygget fungerar även utan databas.
+const url = process.env.DATABASE_URL ?? "postgresql://unset:unset@localhost/unset";
 
-export const db = url ? drizzle(neon(url), { schema, casing: "snake_case" }) : null;
+export const db = drizzle(neon(url), { schema, casing: "snake_case" });

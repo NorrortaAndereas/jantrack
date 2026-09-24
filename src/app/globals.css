@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
+/* Designsystem – alla färger som tokens så att ljust/mörkt läge byts på ett ställe. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  color-scheme: light;
+  --bg: #eef0f5;
+  --surface: #ffffff;
+  --surface-2: #f5f6fa;
+  --border: #e6e8ef;
+  --ink: #0e1120;
+  --ink-2: #4b5063;
+  --muted: #7a7f90;
+  --primary: #3446f2;
+  --primary-hover: #2537e0;
+  --primary-soft: #eef0ff;
+  --primary-track: #dfe3fd;
+  --on-primary: #ffffff;
+  --positive: #16803c;
+  --positive-soft: #e4f5c9;
+  --positive-ink: #365f0f;
+  --negative: #c2410c;
+  --warning: #ea6a2a;
+  --warning-track: #fbe1d3;
+  --grid: #eceef3;
+  --field-border: #c9ccd6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+    --bg: #0c0d12;
+    --surface: #16181f;
+    --surface-2: #1d2029;
+    --border: #272a35;
+    --ink: #f3f4f8;
+    --ink-2: #c3c6d2;
+    --muted: #8e93a4;
+    --primary: #4f5fff;
+    --primary-hover: #6170ff;
+    --primary-soft: #1f2445;
+    --primary-track: #2a3060;
+    --positive: #4ade80;
+    --positive-soft: #1b3517;
+    --positive-ink: #bef08c;
+    --negative: #fb923c;
+    --warning: #fb8b4c;
+    --warning-track: #3b2518;
+    --grid: #232632;
+    --field-border: #3a3e4c;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-track: var(--primary-track);
+  --color-on-primary: var(--on-primary);
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-positive-ink: var(--positive-ink);
+  --color-negative: var(--negative);
+  --color-warning: var(--warning);
+  --color-warning-track: var(--warning-track);
+  --color-grid: var(--grid);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-newsreader);
+  --radius-card: 1.75rem;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  accent-color: var(--primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Formulär: visa fel först efter att användaren interagerat med fältet. */
+.field {
+  width: 100%;
+  min-height: 2.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--field-border);
+  background: var(--surface);
+  padding: 0.5rem 0.875rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.field:hover { border-color: color-mix(in oklab, var(--field-border), var(--ink) 25%); }
+.field:invalid:user-invalid { border-color: var(--negative); }
+textarea.field { min-height: 8rem; line-height: 1.5; }
+
+/* Diagonal skraffering, t.ex. för kommande perioder i stapeldiagram. */
+.hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--border) 0 2px,
+    transparent 2px 7px
+  );
 }
