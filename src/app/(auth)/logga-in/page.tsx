@@ -10,8 +10,7 @@ export default async function SignInPage() {
   if (await getOptionalUser()) redirect("/");
   return (
     <>
-      <h1 className="text-2xl font-semibold tracking-tight">Välkommen tillbaka</h1>
-      <p className="mt-1.5 mb-8 text-ink-2">Logga in för att fortsätta din resa.</p>
+      <h1 className="sr-only">Logga in</h1>
       <AuthForm mode="sign-in" />
       <p className="mt-6 text-center text-sm text-ink-2">
         Inget konto?{" "}
