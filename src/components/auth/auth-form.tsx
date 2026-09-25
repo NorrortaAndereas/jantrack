@@ -2,7 +2,7 @@
 
 import { CircleAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { PasswordField } from "./password-field";
 
@@ -11,6 +11,20 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const signUp = mode === "sign-up";
+  // Mobil inloggning: rutan börjar ihopfälld med bara knappen, fälten visas vid första klicket.
+  const [expanded, setExpanded] = useState(signUp);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const collapsed = expanded ? "" : "max-lg:hidden";
+
+  useEffect(() => {
+    if (expanded && !signUp) emailRef.current?.focus();
+  }, [expanded, signUp]);
+
+  function onButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (expanded || matchMedia("(min-width: 64rem)").matches) return;
+    e.preventDefault();
+    setExpanded(true);
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -47,13 +61,21 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
           <input id="name" name="name" autoComplete="given-name" required maxLength={60} className="field" />
         </div>
       )}
-      <div className="space-y-1.5">
+      <div className={`space-y-1.5 ${collapsed}`}>
         <label htmlFor="email" className="text-sm font-medium">
           E-post
         </label>
-        <input id="email" name="email" type="email" autoComplete="username" required className="field" />
+        <input
+          ref={emailRef}
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="username"
+          required
+          className="field"
+        />
       </div>
-      <div className="space-y-1.5">
+      <div className={`space-y-1.5 ${collapsed}`}>
         <label htmlFor="password" className="text-sm font-medium">
           Lösenord
         </label>
@@ -67,7 +89,7 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
           </p>
         )}
       </div>
-      <p role="alert" aria-live="assertive" className="min-h-5 text-sm text-negative">
+      <p role="alert" aria-live="assertive" className={`min-h-5 text-sm text-negative ${collapsed}`}>
         {error && (
           <span className="inline-flex items-center gap-1.5">
             <CircleAlert className="size-4" aria-hidden />
@@ -78,6 +100,7 @@ export function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
       <button
         type="submit"
         disabled={pending}
+        onClick={onButtonClick}
         className="min-h-12 w-full rounded-full bg-primary text-sm font-medium text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-60"
       >
         {pending ? "Vänta…" : signUp ? "Skapa konto" : "Logga in"}
