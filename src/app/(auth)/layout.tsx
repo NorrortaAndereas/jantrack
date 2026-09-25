@@ -4,7 +4,7 @@ import logo from "../../../public/media/jantrack-logo.webp";
 
 export default function AuthLayout({ children }: LayoutProps<"/">) {
   return (
-    <main className="grid min-h-dvh place-items-center p-4">
+    <main className="grid min-h-dvh justify-items-center p-4 lg:place-items-center">
       <AuthStage
         logo={
           // Logotypen är vit – i ljust läge inverteras den till mörk.
