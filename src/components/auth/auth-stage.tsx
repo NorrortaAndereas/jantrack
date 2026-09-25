@@ -36,7 +36,7 @@ export function AuthStage({ logo, children }: { logo: React.ReactNode; children:
         ref={columnRef}
         className="contents lg:flex lg:w-md lg:shrink-0 lg:flex-col lg:items-center lg:gap-8"
       >
-        <div className="order-1">{logo}</div>
+        <div className="order-1 max-lg:pt-8">{logo}</div>
         <div className="order-3 w-full max-lg:mb-auto rounded-(--radius-card) border border-border bg-surface p-8 sm:p-10">
           {children}
         </div>
