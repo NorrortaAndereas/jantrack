@@ -30,14 +30,18 @@ export function AuthStage({ logo, children }: { logo: React.ReactNode; children:
 
   return (
     <div className="flex w-full max-w-md flex-col items-center gap-6 lg:w-auto lg:max-w-none lg:flex-row lg:items-stretch lg:gap-10">
-      <div ref={columnRef} className="flex w-full max-w-md shrink-0 flex-col items-center gap-8 lg:w-md">
-        {logo}
-        <div className="w-full rounded-(--radius-card) border border-border bg-surface p-8 sm:p-10">
+      {/* Mobil: kolumnen "löses upp" (contents) så att ordningen blir logotyp, video, ruta. */}
+      <div
+        ref={columnRef}
+        className="contents lg:flex lg:w-md lg:shrink-0 lg:flex-col lg:items-center lg:gap-8"
+      >
+        <div className="order-1">{logo}</div>
+        <div className="order-3 w-full rounded-(--radius-card) border border-border bg-surface p-8 sm:p-10">
           {children}
         </div>
       </div>
       <LoginVideo
-        className="aspect-[654/1080] w-3/4 max-w-xs lg:aspect-auto lg:w-[303px] lg:max-w-none"
+        className="order-2 aspect-[654/1080] w-3/5 max-w-60 lg:order-none lg:aspect-auto lg:w-[303px] lg:max-w-none"
         style={width ? { width } : undefined}
       />
     </div>
