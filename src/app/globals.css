@@ -1,53 +1,28 @@
 @import "tailwindcss";
 
-/* Designsystem – alla färger som tokens så att ljust/mörkt läge byts på ett ställe. */
+/* Designsystem – alla färger som tokens. Sajten är alltid mörk, oavsett datorns inställning. */
 :root {
-  color-scheme: light;
-  --bg: #eef0f5;
-  --surface: #ffffff;
-  --surface-2: #f5f6fa;
-  --border: #e6e8ef;
-  --ink: #0e1120;
-  --ink-2: #4b5063;
-  --muted: #7a7f90;
-  --primary: #3446f2;
-  --primary-hover: #2537e0;
-  --primary-soft: #eef0ff;
-  --primary-track: #dfe3fd;
+  color-scheme: dark;
+  --bg: #0c0d12;
+  --surface: #16181f;
+  --surface-2: #1d2029;
+  --border: #272a35;
+  --ink: #f3f4f8;
+  --ink-2: #c3c6d2;
+  --muted: #8e93a4;
+  --primary: #4f5fff;
+  --primary-hover: #6170ff;
+  --primary-soft: #1f2445;
+  --primary-track: #2a3060;
   --on-primary: #ffffff;
-  --positive: #16803c;
-  --positive-soft: #e4f5c9;
-  --positive-ink: #365f0f;
-  --negative: #c2410c;
-  --warning: #ea6a2a;
-  --warning-track: #fbe1d3;
-  --grid: #eceef3;
-  --field-border: #c9ccd6;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #0c0d12;
-    --surface: #16181f;
-    --surface-2: #1d2029;
-    --border: #272a35;
-    --ink: #f3f4f8;
-    --ink-2: #c3c6d2;
-    --muted: #8e93a4;
-    --primary: #4f5fff;
-    --primary-hover: #6170ff;
-    --primary-soft: #1f2445;
-    --primary-track: #2a3060;
-    --positive: #4ade80;
-    --positive-soft: #1b3517;
-    --positive-ink: #bef08c;
-    --negative: #fb923c;
-    --warning: #fb8b4c;
-    --warning-track: #3b2518;
-    --grid: #232632;
-    --field-border: #3a3e4c;
-  }
+  --positive: #4ade80;
+  --positive-soft: #1b3517;
+  --positive-ink: #bef08c;
+  --negative: #fb923c;
+  --warning: #fb8b4c;
+  --warning-track: #3b2518;
+  --grid: #232632;
+  --field-border: #3a3e4c;
 }
 
 @theme inline {
